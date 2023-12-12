@@ -34,34 +34,21 @@
     <main>
         <h2 class = "section-title" style = "margin-top: 5vh;"> Experiments</h2>
         <div class = experiments-wrapper>  
-            <form id = 'contact-form' action= "https://httpbin.org/post" method="post" target="_blank">
-                <h2>Contact Form</h2>
-                <label for="name">Name: </label>
-                <input type="text" id="name" name="name" required><br>
-                <output id="name-error" class = "errors">&nbsp;</output>
-
-                <label for="email">Email: </label>
-                <input type="email" id="email" name="email" required><br>
-                <output id="email-error" class = "errors">&nbsp;</output> 
-
-                <label for="comments">Comments: </label>
-                <textarea name="comments" id="comments" cols="33" rows="10" maxlength = "80" required></textarea><br>
-                <output id="comments-error" class = "errors">&nbsp;</output><br><br>
-
-                <output id="comments-info">&nbsp;</output><br>
-                
-                <input type="hidden" id="possible_bot" name="possible_bot" value=true>
-                <input id = "submit-button" type="submit" value="Submit">
-             </form> 
-             <div id = "theme-switch" style = "height: 100%;">
-                <h2 id = "current-theme-text">Dark Theme</h2>
-                <button id = "theme-button" type="button" onclick="toggleTheme()">Change Theme</button>
-             </div>
+            <rating-widget>
+                <form id = 'rating-form' action= "https://httpbin.org/post" method="post" target="_blank">
+                    <h2>Rating Widget</h2>
+                    <label for="rating">How satisfied are you?</label>
+                    <input type="hidden"  name="question" value="How satisfied are you">
+                    <input type="hidden"  name="sendBy" value="HTML">
+                    <input type="number"  id = "rating" name="rating" min = "1" max = "5" value = "0" required>
+                    </br>
+                    <button id = "submit-button" type = "submit">Submit</button>      
+                </form> 
+            </rating-widget>
         </div>
     </main>
     <footer>
-        <script src="contactForm.js"></script>
-        <script src="themeSwitcher.js"></script>
+        <script src="script.js"></script>
     </footer>
 </body>
 </html>

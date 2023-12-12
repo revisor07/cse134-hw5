@@ -2,9 +2,8 @@
 :root {
     --background-color: #24252A;
     --text-color: white;
-    --mode-background-color: var(--background-color);
-    --mode-text-color: var(--text-color);
     --menu-underline-color: #bc60fb;
+    --star-color: gold;
   }
 /* global settings */
 * {
@@ -16,7 +15,7 @@ html {
     scroll-behavior: smooth;
 }
 body{
-    background-color: var(--mode-background-color, gray);
+    background-color: var(--background-color, gray);
     margin: 0;
 }
 a,p,i,figcaption,b, label, input, button{
@@ -304,11 +303,12 @@ details[open] summary ~ * {
 
 /* EXTRAS PAGE */
 
-#contact-form, #theme-switch{
+#rating-form, #theme-switch, rating-widget{
     margin: 5vw;
     background-color: #34568B;
     padding: 2em;
     border-radius: 20px 20px 20px 20px;
+    width: 20em;
 }
 
 
@@ -338,31 +338,15 @@ input, textarea{
 }
 
 input{
-    min-width: 20em;
+    width: 30%;
 }
 
 label{
     display: block; 
-    margin-bottom: 0.1em;
+    margin-bottom: 0.3em;
     margin-top: 0.5em;
 }
 
-input:user-invalid, textarea:user-invalid{
-    border: 2px solid #FF6F61;
-}
-
-label:has(+ input:user-invalid),label:has(+ textarea:user-invalid) {
-    content: "w";
-    color: #FF6F61;
-    margin-right: 5px;
-}
-
-.errors {
-    color: #FF6F61;
-    font-size: 0.9em;
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-}
 #theme-switch{
     visibility:hidden;
 }
@@ -370,3 +354,4 @@ label:has(+ input:user-invalid),label:has(+ textarea:user-invalid) {
 .section-title, a {
     color: var(--mode-text-color);
 }
+
