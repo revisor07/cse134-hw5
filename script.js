@@ -11,16 +11,16 @@ class RatingWidget extends HTMLElement {
         for (let i = 1; i <= this.stars; i++) {
             const star = document.createElement('span');
             star.classList.add('star');
-            star.setAttribute("style", "font-size:40px; cursor: pointer; color: gray");
+            star.setAttribute("style", "font-size:40px; cursor: pointer; color: gray; transition: 0.3s;");
             star.innerHTML = '&#9733;';
             star.addEventListener('mouseover', () => this.highlightStars(i));
             star.addEventListener('mouseout', () => this.resetStars());
-            star.addEventListener('click', () => this.sendRating(i));
+            star.addEventListener('click', () => this.sendForm(i));
             container.appendChild(star);
         }
         const title = document.createElement('h2')
         title.setAttribute("style", "font-family: 'Helvetica', 'Arial', monospace");
-        title.innerHTML = "Rating Form";
+        title.innerHTML = "Rating Widget";
         this.shadowRoot.appendChild(title);
         this.shadowRoot.appendChild(container);
         this.ratingFeedback = document.createElement('p');
@@ -43,11 +43,12 @@ class RatingWidget extends HTMLElement {
         });
     }
 
-    sendRating(rating) {
+    sendForm(rating) {
         if (rating / this.stars >= 0.8)
             this.ratingFeedback.innerHTML = `Thanks for ${rating} star rating!`;
         else
-            this.ratingFeedback.innerHTML = `Thank you for you feedback of ${rating} stars. We'll try to do better!`; 
+            this.ratingFeedback.innerHTML = `Thank you for your feedback of ${rating} ${rating === 1 ? ' star' : ' stars'}. We'll try to do better!`; 
+
 
         const formDataObject = {};
         formDataObject['rating'] = rating;
@@ -71,4 +72,57 @@ class RatingWidget extends HTMLElement {
     }
 }
 
+class WeatherWidget extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({mode: 'open'});
+
+        this.title_elem = document.createElement('h2');
+        this.title_elem.setAttribute("style", "font-family: 'Helvetica', 'Arial', monospace");
+        this.title_elem.textContent = "Weather Widget";
+        this.shadowRoot.appendChild(this.title_elem);
+
+        this.summary_elem = document.createElement('p');
+        this.summary_elem.setAttribute("style", "font-family: 'Roboto Mono', 'Arial', monospace; max-width: 80%");
+        this.summary_elem.textContent = "Loading...";
+        this.shadowRoot.appendChild(this.summary_elem);
+        this.fetchWeatherData();
+    }
+
+    fetchWeatherData() {
+        let latitude = 32.8426;
+        let longitude = -117.2577;
+        const apiEndpoint = `https://api.weather.gov/points/${latitude},${longitude}`;
+
+        let location = "";
+        let temp = "";
+        let details = "";
+        fetch(apiEndpoint)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                location = data.properties.relativeLocation.properties.city;
+                return fetch(data.properties.forecast);
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                temp = data.properties.periods[0].temperature;
+                details = data.properties.periods[0].detailedForecast;
+                this.summary_elem.textContent = `${location}: ${temp}°F`;
+                const details_elem = document.createElement('p')
+                details_elem.setAttribute("style", "font-family: 'Roboto Mono', 'Arial', monospace; max-width: 80%");
+                details_elem.textContent = `${details}`;
+                this.shadowRoot.appendChild(details_elem);
+            })
+            .catch(error => {
+                console.error('Error fetching weather data:', error);
+
+                // Update the UI with an error message
+                this.shadowRoot.getElementById('weather-message').textContent = 'Error fetching weather data';
+            });
+    }
+}
+
+customElements.define('weather-widget', WeatherWidget);
 customElements.define('rating-widget', RatingWidget);

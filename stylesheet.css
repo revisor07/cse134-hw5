@@ -303,7 +303,7 @@ details[open] summary ~ * {
 
 /* EXTRAS PAGE */
 
-#rating-form, #theme-switch, rating-widget{
+rating-widget, weather-widget{
     margin: 5vw;
     background-color: #34568B;
     padding: 2em;
@@ -313,15 +313,12 @@ details[open] summary ~ * {
 
 
 
-input, textarea{
-    color: #0e0e0e;
-    margin-bottom: 1em;
-}
 .experiments-wrapper{
     display: flex;
     justify-content: left;
+    align-items: flex-start;
 }
-#submit-button, #theme-button{
+#submit-button{
     background-color: #0e0e0e;
     color: white;
     border: 0;
@@ -333,12 +330,13 @@ input, textarea{
     margin-top: 1em;
     opacity: 70%;
 }
-#submit-button:hover, #theme-button:hover{
+#submit-button:hover{
     opacity: 100%;
 }
 
 input{
     width: 30%;
+    color: var(--background-color, black);
 }
 
 label{
