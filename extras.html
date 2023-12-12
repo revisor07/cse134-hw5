@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuriy Yuzifovich - Extras</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a class = nav-link href="index.html#home">//&nbsp;home</a>
+                </li>
+                <li>
+                    <a class = nav-link href="index.html#expertise">//&nbsp;expertise</a>
+                </li>
+                <li>
+                    <a class = nav-link href="index.html#projects">//&nbsp;projects</a>
+                </li>
+                <li>
+                    <a class = nav-link href="index.html#experience">//&nbsp;experience</a>
+                </li>
+                <li>
+                    <a  class = nav-link href="index.html#contact">//&nbsp;contact</a>
+                </li>
+                <li>
+                    <a  class = nav-link href="extras.html">//&nbsp;extras</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2 class = "section-title" style = "margin-top: 5vh;"> Experiments</h2>
+        <div class = experiments-wrapper>  
+            <form id = 'contact-form' action= "https://httpbin.org/post" method="post" target="_blank">
+                <h2>Contact Form</h2>
+                <label for="name">Name: </label>
+                <input type="text" id="name" name="name" required><br>
+                <output id="name-error" class = "errors">&nbsp;</output>
+
+                <label for="email">Email: </label>
+                <input type="email" id="email" name="email" required><br>
+                <output id="email-error" class = "errors">&nbsp;</output> 
+
+                <label for="comments">Comments: </label>
+                <textarea name="comments" id="comments" cols="33" rows="10" maxlength = "80" required></textarea><br>
+                <output id="comments-error" class = "errors">&nbsp;</output><br><br>
+
+                <output id="comments-info">&nbsp;</output><br>
+                
+                <input type="hidden" id="possible_bot" name="possible_bot" value=true>
+                <input id = "submit-button" type="submit" value="Submit">
+             </form> 
+             <div id = "theme-switch" style = "height: 100%;">
+                <h2 id = "current-theme-text">Dark Theme</h2>
+                <button id = "theme-button" type="button" onclick="toggleTheme()">Change Theme</button>
+             </div>
+        </div>
+    </main>
+    <footer>
+        <script src="contactForm.js"></script>
+        <script src="themeSwitcher.js"></script>
+    </footer>
+</body>
+</html>
+
