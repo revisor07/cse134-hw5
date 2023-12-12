@@ -116,10 +116,8 @@ class WeatherWidget extends HTMLElement {
                 this.shadowRoot.appendChild(details_elem);
             })
             .catch(error => {
-                console.error('Error fetching weather data:', error);
-
-                // Update the UI with an error message
-                this.shadowRoot.getElementById('weather-message').textContent = 'Error fetching weather data';
+                console.error('Error fetching data:', error);
+                this.summary_elem.textContent  = 'Error fetching weather data';
             });
     }
 }
