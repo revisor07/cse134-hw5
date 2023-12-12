@@ -4,8 +4,8 @@ class RatingWidget extends HTMLElement {
         this.stars = document.getElementById('rating').getAttribute('max');
         this.attachShadow({ mode: 'open' });
 
-        const container = document.createElement('div');
-        container.classList.add('rating');
+        const stars_container = document.createElement('div');
+        stars_container.classList.add('rating');
 
 
         for (let i = 1; i <= this.stars; i++) {
@@ -16,13 +16,13 @@ class RatingWidget extends HTMLElement {
             star.addEventListener('mouseover', () => this.highlightStars(i));
             star.addEventListener('mouseout', () => this.resetStars());
             star.addEventListener('click', () => this.sendForm(i));
-            container.appendChild(star);
+            stars_container.appendChild(star);
         }
         const title = document.createElement('h2')
         title.setAttribute("style", "font-family: 'Helvetica', 'Arial', monospace");
         title.innerHTML = "Rating Widget";
         this.shadowRoot.appendChild(title);
-        this.shadowRoot.appendChild(container);
+        this.shadowRoot.appendChild(stars_container);
         this.ratingFeedback = document.createElement('p');
         this.ratingFeedback.setAttribute("style", "font-family: 'Roboto Mono', 'Arial', monospace; max-width: 80%");
         this.shadowRoot.appendChild(this.ratingFeedback);
